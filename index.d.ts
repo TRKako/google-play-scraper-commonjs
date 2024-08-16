@@ -178,13 +178,6 @@ export interface IPermissionItem {
   type: string
 }
 
-export interface IDataSafetyItem {
-  data : string
-  optional : string 
-  purpose : string
-  type : string
-}
-
 // functions
 
 interface IOptions {
@@ -266,14 +259,8 @@ export interface IFnReviewsOptions extends IOptions {
   nextPaginationToken?: string
 }
 
-
-export interface IReviewsResult {
-  data: IReviewsItem[]
-  nextPaginationToken?: string
-}
-
 export interface IFnReviews {
-  (options: IFnReviewsOptions): Promise<IReviewsResult>
+  (options: IFnReviewsOptions): Promise<IReviewsItem[]>
 }
 
 // -- similar
@@ -306,16 +293,8 @@ export interface IFnCategories {
   (options?: IFnCategoriesOptions): Promise<string[]>
 }
 
-// datasafety
-export interface IFnDatasafetyOptions extends IOptions {
-  appId: string
-  lang?: string
-}
-export interface IFnDataSafety {
-  (options?: IFnDatasafetyOptions): Promise<IDataSafetyItem[]>
-}
-
 // memoization
+
 export interface IMemoizedResult {
   category: category,
   collection: collection,
@@ -331,7 +310,6 @@ export interface IMemoizedResult {
   similar: IFnSimilar
   permissions: IFnPermissions
   categories: IFnCategories
-  datasafety: IFnDataSafety
 }
 
 export interface IFnMemoized {
@@ -347,5 +325,4 @@ export const reviews: IFnReviews
 export const similar: IFnSimilar
 export const permissions: IFnPermissions
 export const categories: IFnCategories
-export const datasafety : IFnDataSafety
 export const memoized: IFnMemoized
